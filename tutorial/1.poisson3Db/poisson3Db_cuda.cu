@@ -7,7 +7,9 @@
 #include <amgcl/amg.hpp>
 #include <amgcl/coarsening/smoothed_aggregation.hpp>
 #include <amgcl/relaxation/spai0.hpp>
+#include <amgcl/relaxation/damped_jacobi.hpp>
 #include <amgcl/solver/bicgstab.hpp>
+#include <amgcl/solver/cg.hpp>
 
 #include <amgcl/io/mm.hpp>
 #include <amgcl/profiler.hpp>
@@ -53,9 +55,9 @@ int main(int argc, char *argv[]) {
         amgcl::amg<
             Backend,
             amgcl::coarsening::smoothed_aggregation,
-            amgcl::relaxation::spai0
+            amgcl::relaxation::damped_jacobi
             >,
-        amgcl::solver::bicgstab<Backend>
+        amgcl::solver::cg<Backend>
         > Solver;
 
     // We need to initialize the CUSPARSE library and pass the handle to AMGCL

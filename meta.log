@@ -1,0 +1,97 @@
+NVIDIA GeForce RTX 3060
+Matrix .\poisson3Db.mtx: 85623x85623
+RHS .\poisson3Db_b.mtx: 85623x1
+Solver
+======
+Type:             BiCGStab
+Unknowns:         85623
+Memory footprint: 4.57 M
+
+Preconditioner
+==============
+Number of levels:    3
+Operator complexity: 1.20
+Grid complexity:     1.08
+Memory footprint:    44.81 M
+
+level     unknowns       nonzeros      memory
+---------------------------------------------
+    0        85623        2374949     37.86 M (83.20%)
+    1         6361         446833      5.86 M (15.65%)
+    2          384          32566      1.09 M ( 1.14%)
+
+Iters: 24
+Error: 8.33789e-09
+
+[poisson3Db:     4.873 s] (100.00%)
+[ self:          0.135 s] (  2.76%)
+[  read:         4.526 s] ( 92.87%)
+[  setup:        0.123 s] (  2.53%)
+[  solve:        0.089 s] (  1.83%)
+
+
+
+
+
+Matrix .\poisson3Db.mtx: 85623x85623
+Done read matrix
+RHS .\poisson3Db_b.mtx: 85623x1
+Solver
+======
+Type:             BiCGStab
+Memory footprint: 4.57 M
+
+Preconditioner
+Number of levels:    3
+Operator complexity: 1.20
+Grid complexity:     1.08
+Memory footprint:    58.93 M
+
+level     unknowns       nonzeros      memory
+---------------------------------------------
+    0        85623        2374949     50.07 M (83.20%)
+    1         6361         446833      7.78 M (15.65%)
+    2          384          32566      1.08 M ( 1.14%)
+
+Iters: 24
+Error: 8.33789e-09
+
+[poisson3Db:     5.087 s] (100.00%)
+[  read:         4.558 s] ( 89.61%)
+[  setup:        0.094 s] (  1.85%)
+[  solve:        0.432 s] (  8.49%)
+
+
+
+
+damped jacobi cg cuda
+NVIDIA GeForce RTX 3060
+Matrix .\poisson3Db.mtx: 85623x85623
+RHS .\poisson3Db_b.mtx: 85623x1
+Solver
+======
+Type:             CG
+Unknowns:         85623
+Memory footprint: 2.61 M
+
+Preconditioner
+==============
+Number of levels:    3
+Operator complexity: 1.20
+Grid complexity:     1.08
+Memory footprint:    44.81 M
+
+level     unknowns       nonzeros      memory
+---------------------------------------------
+    0        85623        2374949     37.86 M (83.20%)
+    1         6361         446833      5.86 M (15.65%)
+    2          384          32566      1.09 M ( 1.14%)
+
+Iters: 100
+Error: 0.00415071
+
+[poisson3Db:     5.167 s] (100.00%)
+[ self:          0.135 s] (  2.62%)
+[  read:         4.500 s] ( 87.08%)
+[  setup:        0.349 s] (  6.76%)
+[  solve:        0.183 s] (  3.54%)

@@ -7,7 +7,9 @@
 #include <amgcl/amg.hpp>
 #include <amgcl/coarsening/smoothed_aggregation.hpp>
 #include <amgcl/relaxation/spai0.hpp>
+#include <amgcl/relaxation/damped_jacobi.hpp>
 #include <amgcl/solver/bicgstab.hpp>
+#include <amgcl/solver/cg.hpp>
 
 #include <amgcl/io/mm.hpp>
 #include <amgcl/profiler.hpp>
@@ -30,6 +32,7 @@ int main(int argc, char *argv[]) {
     prof.tic("read");
     std::tie(rows, cols) = amgcl::io::mm_reader(argv[1])(ptr, col, val);
     std::cout << "Matrix " << argv[1] << ": " << rows << "x" << cols << std::endl;
+    std::cout << "Done read matrix" << std::endl;
 
     std::tie(rows, cols) = amgcl::io::mm_reader(argv[2])(rhs);
     std::cout << "RHS " << argv[2] << ": " << rows << "x" << cols << std::endl;
@@ -54,9 +57,9 @@ int main(int argc, char *argv[]) {
         amgcl::amg<
             PBackend,
             amgcl::coarsening::smoothed_aggregation,
-            amgcl::relaxation::spai0
+            amgcl::relaxation::damped_jacobi
             >,
-        amgcl::solver::bicgstab<SBackend>
+        amgcl::solver::cg<SBackend>
         > Solver;
 
     // Initialize the solver with the system matrix:
