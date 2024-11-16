@@ -554,6 +554,47 @@ class amg {
 
     template <class B, template <class> class C, template <class> class R>
     friend std::ostream& operator<<(std::ostream &os, const amg<B, C, R> &a);
+
+public:
+    /// Returns the number of levels in the hierarchy.
+    size_t numlevels() const {
+        return levels.size();
+    }
+
+    /// Returns the levels
+    const std::list<level>& get_levels() const {
+        return levels;
+    }
+
+    /// Returns the prolongation operator for the given level.
+    const matrix& get_P(size_t l) const {
+        precondition(l < numlevels(), "Invalid level");
+        return *levels[l].P;
+    }
+
+    /// Returns all prolongation operators.
+    std::vector<std::shared_ptr<matrix>> get_Ps() const {
+        std::vector<std::shared_ptr<matrix>> Ps;
+        for(const level &lvl : levels)
+            if (lvl.P)
+                Ps.push_back(lvl.P); //there is no P in coarest level
+        return Ps;
+    }
+
+    /// Returns the restriction operator for the given level.
+    const matrix& get_R(size_t l) const {
+        precondition(l < numlevels(), "Invalid level");
+        return *levels[l].R;
+    }
+
+    /// Returns all restriction operators.
+    std::vector<std::shared_ptr<matrix>> get_Rs() const {
+        std::vector<std::shared_ptr<matrix>> Rs;
+        for(const level &lvl : levels)
+            if (lvl.R)
+                Rs.push_back(lvl.R);
+        return Rs;
+    }
 };
 
 /// Sends information about the AMG hierarchy to output stream.

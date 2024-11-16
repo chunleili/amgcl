@@ -62,6 +62,11 @@ int main(int argc, char *argv[]) {
         amgcl::solver::cg<SBackend>
         > Solver;
 
+    // Set the parameters for the solver:
+    Solver::params prm;
+    prm.precond.coarsening.relax = 0.0; //Unsmoothed aggregation
+    prm.precond.coarsening.aggr.eps_strong = 0.25; //Strength threshold
+    
     // Initialize the solver with the system matrix:
     prof.tic("setup");
     Solver solve(A);
@@ -69,6 +74,19 @@ int main(int argc, char *argv[]) {
 
     // Show the mini-report on the constructed solver:
     std::cout << solve << std::endl;
+
+    // output the prolongation operator:
+    auto levels = solve.precond().get_levels();
+    size_t numlevels = levels.size();
+    auto Ps = solve.precond().get_Ps();
+
+    prof.tic("write_prolongation");
+    for (int lv = 0; lv < Ps.size(); lv++)
+    {
+        printf("Writing P%d.mtx...\n", lv);
+        amgcl::io::mm_write("P" + std::to_string(lv) + ".mtx", *(Ps[lv]));
+    }
+    prof.toc("write_prolongation");
 
     // Solve the system with the zero initial approximation:
     int iters;
