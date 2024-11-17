@@ -88,18 +88,18 @@ int main(int argc, char *argv[]) {
     }
     prof.toc("write_prolongation");
 
-    // Solve the system with the zero initial approximation:
-    int iters;
-    double error;
-    std::vector<double> x(rows, 0.0);
+    // // Solve the system with the zero initial approximation:
+    // int iters;
+    // double error;
+    // std::vector<double> x(rows, 0.0);
 
-    prof.tic("solve");
-    std::tie(iters, error) = solve(A, rhs, x);
-    prof.toc("solve");
+    // prof.tic("solve");
+    // std::tie(iters, error) = solve(A, rhs, x);
+    // prof.toc("solve");
 
-    // Output the number of iterations, the relative error,
-    // and the profiling data:
-    std::cout << "Iters: " << iters << std::endl
-              << "Error: " << error << std::endl
-              << prof << std::endl;
+    // // Output the number of iterations, the relative error,
+    // // and the profiling data:
+    // std::cout << "Iters: " << iters << std::endl
+    //           << "Error: " << error << std::endl
+    //           << prof << std::endl;
 }

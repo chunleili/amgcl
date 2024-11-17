@@ -5,9 +5,23 @@
         "name": "vcpkg",
         "generator": "Visual Studio 17 2022",
         "binaryDir": "${sourceDir}/build",
+        "environment": {
+          "VCPKG_ROOT": "D:/Dev/vcpkg/"
+        },
         "cacheVariables": {
-          "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+            "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+            "AMGCL_BUILD_EXAMPLES": true
         }
+      }
+    ],
+    "buildPresets": [
+        {
+          "name": "debug",
+          "description": "VS 2022 debug",
+          "configurePreset": "vcpkg",
+          "configuration": "Debug",
+          "targets": "poisson3Db",
+          "jobs": 8
       }
     ]
   }

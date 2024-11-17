@@ -10,7 +10,7 @@
             "program": "${workspaceFolder}/build/tutorial/1.poisson3Db/Debug/poisson3Db.exe",
             // "args": ["poisson3Db.mtx", "poisson3Db_b.mtx"],
             "args": ["soft.mtx", "soft_b.mtx"],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [
                 {
